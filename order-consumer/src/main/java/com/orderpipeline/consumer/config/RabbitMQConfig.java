@@ -1,8 +1,7 @@
-package com.orderpipeline.producer.config;
+package com.orderpipeline.consumer.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.orderpipeline.common.constant.RabbitMQConstants;
 import org.springframework.amqp.core.*;
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
-
+    
     @Bean
     public DirectExchange orderExchange() {
         return new DirectExchange(RabbitMQConstants.ORDER_EXCHANGE);
