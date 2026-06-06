@@ -20,6 +20,7 @@
     <modules>
         <module>order-common</module>
         <module>order-producer</module>
+        <module>order-consumer</module>
     </modules>
 
     <properties>
