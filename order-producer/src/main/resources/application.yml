@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+  jackson:
+    deserialization:
+      use-big-decimal-for-floats: true
+
+logging:
+  level:
+    com.orderpipeline.producer: DEBUG

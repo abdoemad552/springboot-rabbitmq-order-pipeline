@@ -1,0 +1,16 @@
+package com.orderpipeline.common.model;
+
+public enum OrderStatus {
+    PENDING,
+    PAYMENT_PROCESSING,
+    PAYMENT_SUCCESS,
+    PAYMENT_FAILED,
+    INVENTORY_PROCESSING,
+    INVENTORY_SUCCESS,
+    INVENTORY_FAILED,
+    SHIPPING_PROCESSING,
+    SHIPPING_SUCCESS,
+    SHIPPING_FAILED,
+    COMPLETED,
+    FAILED
+}
