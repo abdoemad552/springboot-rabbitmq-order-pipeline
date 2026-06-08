@@ -14,7 +14,7 @@ public class StatusWebSocketBroker {
     private final SimpMessagingTemplate messagingTemplate;
     
     public void sendStatusUpdate(StatusUpdate statusUpdate) {
-        String destination = "/topic/orders" + statusUpdate.getOrderId();
+        String destination = "/topic/orders/" + statusUpdate.getOrderId();
         log.info("Pushing status update to WebSocket [{}] — status: {}",
             destination, statusUpdate.getStatus());
         messagingTemplate.convertAndSend(destination, statusUpdate);

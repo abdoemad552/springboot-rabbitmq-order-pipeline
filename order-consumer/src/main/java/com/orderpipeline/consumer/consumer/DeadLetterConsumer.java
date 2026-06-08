@@ -34,7 +34,7 @@ public class DeadLetterConsumer {
             case PAYMENT_FAILED ->
                 statusPublisher.publish(order.getId(), OrderStatus.FAILED, "Order failed — payment unsuccessful");
             case INVENTORY_FAILED ->
-                statusPublisher.publish(order.getId(), OrderStatus.FAILED, "OOrder failed — inventory unavailable, payment will be refunded");
+                statusPublisher.publish(order.getId(), OrderStatus.FAILED, "Order failed — inventory unavailable, payment will be refunded");
             case SHIPPING_FAILED ->
                 statusPublisher.publish(order.getId(), OrderStatus.FAILED, "Order failed — shipment error, payment and inventory will be released");
             default ->
