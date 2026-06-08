@@ -625,7 +625,7 @@ Example response:
   "customer": {
     "name": "Ahmed Ali",
     "email": "ahmed@example.com",
-    "address": "Cairo, Egypt"
+    "shippingAddress": "Cairo, Egypt"
   },
   "items": [
     {
@@ -660,7 +660,7 @@ curl -X POST http://localhost:8080/api/orders \
     "customer": {
       "name": "Ahmed Ali",
       "email": "ahmed@example.com",
-      "address": "Cairo, Egypt"
+      "shippingAddress": "Cairo, Egypt"
     },
     "items": [
       {
@@ -734,7 +734,7 @@ Body:
   "customer": {
     "name": "Postman User",
     "email": "postman@example.com",
-    "address": "Alexandria, Egypt"
+    "shippingAddress": "Alexandria, Egypt"
   },
   "items": [
     {
@@ -779,7 +779,7 @@ Example request for an invalid quantity:
   "customer": {
     "name": "Failure User",
     "email": "failure@example.com",
-    "address": "Cairo, Egypt"
+    "shippingAddress": "Cairo, Egypt"
   },
   "items": [
     {
