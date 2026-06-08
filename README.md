@@ -969,4 +969,3 @@ docker compose down
 - RabbitMQ is the backbone of the workflow and decouples the services.
 - The DLQ provides a safe place for failed messages after retries are exhausted.
 - This project is intended as a learning/demo project and can be extended with persistence, authentication, tracing, metrics, and production-grade error handling.
-```
