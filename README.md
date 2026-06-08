@@ -1,10 +1,3 @@
-> docs/architecture.png
->
-> The README references it as:
->
-> ```markdown
-> ![Architecture](docs/architecture.png)
-
 # springboot-rabbitmq-order-pipeline
 
 ![Java](https://img.shields.io/badge/Java-21-orange)
