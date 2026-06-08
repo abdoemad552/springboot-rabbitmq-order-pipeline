@@ -54,6 +54,18 @@ services:
     networks:
       - order-network
 
+  order-frontend:
+    build:
+      context: ./order-frontend
+      dockerfile: Dockerfile
+    container_name: order-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - order-producer
+    networks:
+      - order-network
+
 networks:
   order-network:
     driver: bridge

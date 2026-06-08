@@ -1,0 +1,109 @@
+<div class="max-w-2xl mx-auto">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-8">
+    <div>
+      <h2 class="text-2xl font-semibold text-gray-800">Order #{{ orderId }}</h2>
+      <p class="text-sm text-gray-500 mt-1">Tracking your order in real time</p>
+    </div>
+    <a routerLink="/"
+       class="text-sm text-blue-600 hover:text-blue-800 font-medium">
+      ← Place another order
+    </a>
+  </div>
+
+  <!-- Pipeline Stages -->
+  <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6">
+    <div class="flex items-center justify-between">
+      @for (stage of stages(); track stage.label; let last = $last) {
+
+        <!-- Stage -->
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg font-medium transition-all"
+               [class.bg-gray-100]="stage.state === 'pending'"
+               [class.text-gray-400]="stage.state === 'pending'"
+               [class.bg-blue-100]="stage.state === 'processing'"
+               [class.text-blue-600]="stage.state === 'processing'"
+               [class.bg-green-100]="stage.state === 'success'"
+               [class.text-green-600]="stage.state === 'success'"
+               [class.bg-red-100]="stage.state === 'failed'"
+               [class.text-red-600]="stage.state === 'failed'">
+            @switch (stage.state) {
+              @case ('pending') {
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                </svg>
+              }
+              @case ('processing') {
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                </svg>
+              }
+              @case ('success') {
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+              }
+              @case ('failed') {
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="m15 9-6 6"/>
+                  <path d="m9 9 6 6"/>
+                </svg>
+              }
+            }
+          </div>
+          <span class="text-sm font-medium mt-2"
+                [class.text-gray-400]="stage.state === 'pending'"
+                [class.text-blue-600]="stage.state === 'processing'"
+                [class.text-green-600]="stage.state === 'success'"
+                [class.text-red-600]="stage.state === 'failed'">
+            {{ stage.label }}
+          </span>
+        </div>
+
+        <!-- Connector -->
+        @if (!last) {
+          <div class="flex-1 h-0.5 mx-3"
+               [class.bg-gray-200]="stage.state === 'pending'"
+               [class.bg-blue-300]="stage.state === 'processing'"
+               [class.bg-green-400]="stage.state === 'success'"
+               [class.bg-red-400]="stage.state === 'failed'">
+          </div>
+        }
+      }
+    </div>
+
+    <!-- Final status -->
+    @if (isCompleted()) {
+      <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg text-center">
+        <p class="text-green-700 font-medium">🎉 Your order has been completed successfully!</p>
+      </div>
+    }
+    @if (isFailed()) {
+      <div class="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg text-center">
+        <p class="text-red-700 font-medium">❌ Your order has failed. Please try again.</p>
+      </div>
+    }
+  </div>
+
+  <!-- Status Log -->
+  <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-4">Status Log</h3>
+    @if (updates().length === 0) {
+      <p class="text-sm text-gray-400">Waiting for updates...</p>
+    }
+    <div class="space-y-3">
+      @for (update of updates(); track update.timestamp) {
+        <div class="flex items-start gap-3 text-sm">
+          <span class="text-gray-400 whitespace-nowrap">
+            {{ update.timestamp | date:'HH:mm:ss' }}
+          </span>
+          <span class="text-gray-700">{{ update.status | orderStatus }}</span>
+          <span class="text-gray-500">— {{ update.message }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+</div>
